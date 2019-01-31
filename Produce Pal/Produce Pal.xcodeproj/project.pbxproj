@@ -71,15 +71,39 @@
 		7A45D8BA2200C4F600392E53 /* Produce Pal */ = {
 			isa = PBXGroup;
 			children = (
+				7AFB02A72203760F00868D61 /* Controller */,
+				7AFB02A62203760A00868D61 /* View */,
+				7AFB02A5220375FD00868D61 /* Model */,
 				7A45D8BB2200C4F600392E53 /* AppDelegate.swift */,
-				7A45D8BD2200C4F600392E53 /* ViewController.swift */,
-				7A45D8BF2200C4F600392E53 /* Main.storyboard */,
 				7A45D8C52200C4FA00392E53 /* Assets.xcassets */,
-				7A45D8C72200C4FA00392E53 /* LaunchScreen.storyboard */,
 				7A45D8CA2200C4FA00392E53 /* Info.plist */,
 				7A45D8C22200C4F600392E53 /* Produce_Pal.xcdatamodeld */,
 			);
 			path = "Produce Pal";
+			sourceTree = "<group>";
+		};
+		7AFB02A5220375FD00868D61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7AFB02A62203760A00868D61 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A45D8BF2200C4F600392E53 /* Main.storyboard */,
+				7A45D8C72200C4FA00392E53 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7AFB02A72203760F00868D61 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7A45D8BD2200C4F600392E53 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		B348B71657D2EF9D1EE0DC45 /* Pods */ = {

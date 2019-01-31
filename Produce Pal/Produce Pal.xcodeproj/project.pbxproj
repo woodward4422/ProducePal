@@ -13,6 +13,10 @@
 		7A45D8C42200C4F600392E53 /* Produce_Pal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8C22200C4F600392E53 /* Produce_Pal.xcdatamodeld */; };
 		7A45D8C62200C4FA00392E53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A45D8C52200C4FA00392E53 /* Assets.xcassets */; };
 		7A45D8C92200C4FA00392E53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A45D8C72200C4FA00392E53 /* LaunchScreen.storyboard */; };
+		7AFB02B122037D0A00868D61 /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B022037D0A00868D61 /* Market.swift */; };
+		7AFB02B422037D4200868D61 /* MarketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B322037D4200868D61 /* MarketService.swift */; };
+		7AFB02B722037E3900868D61 /* ProdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B622037E3900868D61 /* ProdError.swift */; };
+		7AFB02BA22037EEA00868D61 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B922037EEA00868D61 /* API.swift */; };
 		F8759B5BDB905EFE08A7FF94 /* Pods_Produce_Pal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64DC0C49FA536E2EF8C8042 /* Pods_Produce_Pal.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +30,10 @@
 		7A45D8C52200C4FA00392E53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A45D8C82200C4FA00392E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A45D8CA2200C4FA00392E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AFB02B022037D0A00868D61 /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
+		7AFB02B322037D4200868D61 /* MarketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketService.swift; sourceTree = "<group>"; };
+		7AFB02B622037E3900868D61 /* ProdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdError.swift; sourceTree = "<group>"; };
+		7AFB02B922037EEA00868D61 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AD26B4536E33783C6B354278 /* Pods-Produce Pal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Produce Pal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Produce Pal/Pods-Produce Pal.release.xcconfig"; sourceTree = "<group>"; };
 		C64DC0C49FA536E2EF8C8042 /* Pods_Produce_Pal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Produce_Pal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -71,22 +79,18 @@
 		7A45D8BA2200C4F600392E53 /* Produce Pal */ = {
 			isa = PBXGroup;
 			children = (
+				7AFB02B822037E9700868D61 /* Constants */,
+				7AFB02B522037DF400868D61 /* Errors */,
+				7AFB02B222037D1400868D61 /* Services */,
+				7AFB02AF22037CF400868D61 /* Model */,
 				7AFB02A72203760F00868D61 /* Controller */,
 				7AFB02A62203760A00868D61 /* View */,
-				7AFB02A5220375FD00868D61 /* Model */,
 				7A45D8BB2200C4F600392E53 /* AppDelegate.swift */,
 				7A45D8C52200C4FA00392E53 /* Assets.xcassets */,
 				7A45D8CA2200C4FA00392E53 /* Info.plist */,
 				7A45D8C22200C4F600392E53 /* Produce_Pal.xcdatamodeld */,
 			);
 			path = "Produce Pal";
-			sourceTree = "<group>";
-		};
-		7AFB02A5220375FD00868D61 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		7AFB02A62203760A00868D61 /* View */ = {
@@ -104,6 +108,38 @@
 				7A45D8BD2200C4F600392E53 /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		7AFB02AF22037CF400868D61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7AFB02B022037D0A00868D61 /* Market.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7AFB02B222037D1400868D61 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7AFB02B322037D4200868D61 /* MarketService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7AFB02B522037DF400868D61 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				7AFB02B622037E3900868D61 /* ProdError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		7AFB02B822037E9700868D61 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7AFB02B922037EEA00868D61 /* API.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		B348B71657D2EF9D1EE0DC45 /* Pods */ = {
@@ -195,12 +231,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Produce Pal/Pods-Produce Pal-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -258,6 +298,10 @@
 				7A45D8BE2200C4F600392E53 /* ViewController.swift in Sources */,
 				7A45D8C42200C4F600392E53 /* Produce_Pal.xcdatamodeld in Sources */,
 				7A45D8BC2200C4F600392E53 /* AppDelegate.swift in Sources */,
+				7AFB02B722037E3900868D61 /* ProdError.swift in Sources */,
+				7AFB02B122037D0A00868D61 /* Market.swift in Sources */,
+				7AFB02B422037D4200868D61 /* MarketService.swift in Sources */,
+				7AFB02BA22037EEA00868D61 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

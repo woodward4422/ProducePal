@@ -7,5 +7,7 @@ target 'Produce Pal' do
 
   # Pods for Produce Pal
   pod 'Alamofire'
+  pod 'Result'
+  pod 'SwiftyJSON'
 
 end

@@ -13,8 +13,18 @@ import SwiftyJSON
 
 struct MarketService{
     
-    static func getMarketIDs(zip: String,completion: @escaping (Result<[String],ProdError>) -> Void) {
-        let url = APIConstants.baseURL + zip
+    /**
+     Gets a list of Markets with only the required attributes stored(id,name).
+     
+     - Parameter zip: A zip code to be used for the API request for where the user wants to get farmers markets.
+     
+     - Parameter completion: A completion handler to take in whether the result was successful or not
+     
+     - Returns: A completion with either an array of markets or an error.
+     */
+    
+    static func getMarkets(zip: String,completion: @escaping (Result<[Market],ProdError>) -> Void) {
+        let url = APIConstants.baseIdURL + zip
         Alamofire.request(url, method: .get).responseJSON { response in
             switch response.result {
             case .success:
@@ -25,14 +35,12 @@ struct MarketService{
                     print("No Array in the JSON response")
                     return completion(.failure(ProdError.KeyDoesNotExist("There was an error with the key")))
                 }
-                var marketIDs = [String]()
+                var markets = [Market]()
                 for jsonObj in array{
-                    let id = jsonObj["id"].string
-                    guard let safeID = id else {fatalError("No ID")}
-                    marketIDs.append(safeID)
-                    
+                    guard let market = Market(json: jsonObj) else {fatalError("No Market returned back")}
+                    markets.append(market)
                 }
-                return completion(.success(marketIDs))
+                return completion(.success(markets))
             case .failure(let error):
                 print("Error:\(error)")
                 return completion(.failure(ProdError.FailedAPICall(error.localizedDescription)))
@@ -41,4 +49,43 @@ struct MarketService{
             }
         }
     }
+    
+    
+    
+    /**
+     Gets a list of Markets with only the required attributes stored(id,name).
+     
+     - Parameter zip: A zip code to be used for the API request for where the user wants to get farmers markets.
+     
+     - Parameter completion: A completion handler to take in whether the result was successful or not
+     
+     - Returns: A completion with either an array of markets or an error.
+     */
+    
+    static func getMarketInformation(market: Market,completion: @escaping (Result<Market,ProdError>) -> Void) {
+        let url = APIConstants.baseInfoURL + market.id
+        Alamofire.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success:
+                print("API for Information success")
+                let json: JSON = JSON(response.result.value!)
+                var marketDetails = json["marketdetails"]
+                var resultMarket = market
+                resultMarket.location = marketDetails["Address"].string
+                resultMarket.products = marketDetails["Products"].string
+                resultMarket.location = marketDetails["Address"].string
+                resultMarket.time = marketDetails["Schedule"].string
+                print(resultMarket)
+                return completion(.success(resultMarket))
+            case .failure(let error):
+                print("Error:\(error)")
+                return completion(.failure(ProdError.FailedAPICall(error.localizedDescription)))
+                
+                
+            }
+        }
+    }
+    
+    
+    
 }

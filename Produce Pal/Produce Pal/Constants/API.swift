@@ -10,5 +10,6 @@ import Foundation
 
 
 struct APIConstants{
-    static let baseURL = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip="
+    static let baseIdURL = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip="
+    static let baseInfoURL = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id="
 }

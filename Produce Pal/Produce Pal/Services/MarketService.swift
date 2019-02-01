@@ -53,13 +53,13 @@ struct MarketService{
     
     
     /**
-     Gets a list of Markets with only the required attributes stored(id,name).
+     Gets a list of Markets with market information filled out enough to be used on the map.
      
-     - Parameter zip: A zip code to be used for the API request for where the user wants to get farmers markets.
+     - Parameter Market: A passed in incomplete market, that will be made a copy of to complete.
      
      - Parameter completion: A completion handler to take in whether the result was successful or not
      
-     - Returns: A completion with either an array of markets or an error.
+     - Returns: A completion with either a market or an error.
      */
     
     static func getMarketInformation(market: Market,completion: @escaping (Result<Market,ProdError>) -> Void) {

@@ -28,7 +28,7 @@ struct GeocodingService{
         }
         let trimmedString = marketLocation.removeWhitespace()
         print(trimmedString)
-        let url = "https://maps.googleapis.com/maps/api/geocode/json?address=\(trimmedString)&key=AIzaSyBukvkKCjPymdoa0MJk4GOmuk5iDxrQEEo"
+        let url = "https://maps.googleapis.com/maps/api/geocode/json?address=\(trimmedString)&key="
         Alamofire.request(url, method: .get).responseJSON { response in
             switch response.result {
             case .success:

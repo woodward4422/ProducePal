@@ -28,6 +28,7 @@ struct MarketService{
         Alamofire.request(url, method: .get).responseJSON { response in
             switch response.result {
             case .success:
+                let dpg = DispatchGroup()
                 print("API call success")
                 let json: JSON = JSON(response.result.value!)
                 let resultsArray = json["results"]
@@ -37,10 +38,29 @@ struct MarketService{
                 }
                 var markets = [Market]()
                 for jsonObj in array{
+                    dpg.enter()
                     guard let market = Market(json: jsonObj) else {fatalError("No Market returned back")}
-                    markets.append(market)
+                    getMarketInformation(market: market, completion: { (result) in
+                        dpg.leave()
+                        switch result{
+                        case .success(let completedMarket):
+                            markets.append(completedMarket)
+
+                        case .failure(let _):
+                            return
+                        }
+
+                    })
+                    
+                    
                 }
-                return completion(.success(markets))
+                
+                dpg.notify(queue: .main) {
+                    return completion(.success(markets))
+                }
+
+
+
             case .failure(let error):
                 print("Error:\(error)")
                 return completion(.failure(ProdError.FailedAPICall(error.localizedDescription)))
@@ -77,6 +97,7 @@ struct MarketService{
                 resultMarket.time = marketDetails["Schedule"].string
                 print(resultMarket)
                 return completion(.success(resultMarket))
+
             case .failure(let error):
                 print("Error:\(error)")
                 return completion(.failure(ProdError.FailedAPICall(error.localizedDescription)))
@@ -85,6 +106,7 @@ struct MarketService{
             }
         }
     }
+
     
     
     

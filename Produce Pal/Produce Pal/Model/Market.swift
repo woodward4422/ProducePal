@@ -15,6 +15,8 @@ struct Market{
     var location: String?
     var time: String?
     var products: String?
+    var lat: Double?
+    var lon: Double?
     
     
     init(id: String, name: String){

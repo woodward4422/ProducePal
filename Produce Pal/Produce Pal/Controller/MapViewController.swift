@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+    var markets = [Market]()
     
     var marketMap: MKMapView {
         let mapView = MKMapView()
@@ -24,7 +25,52 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupMap()
-    }
+//        MarketService.getMarkets(zip: "94102") { (result) in
+//            switch result {
+//            case .success(let idMarkets):
+//                for element in idMarkets{
+//                    MarketService.getMarketInformation(market: element, completion: { (result) in
+//                        switch result{
+//                        case .success(let market):
+//
+//                            GeocodingService.getLocationInfo(market: market) { (result) in
+//                                switch result{
+//                                case .success(let finalMarket):
+//                                    print("Market \(market)")
+//                                    self.markets.append(market)
+//                                case .failure(let error):
+//                                    print("Something went wrong \(error.localizedDescription)")
+//                                }
+//                            }
+//                        case .failure:
+//                            let alertVC = UIAlertController(title: "Unable to load markets", message: "Unable to retrieve Markets within this area", preferredStyle: .alert)
+//                            self.present(alertVC, animated: true)
+//                        }
+//
+//                    })
+//                }
+//            case .failure(let error):
+//                print("Error: \(error)")
+//                let alertVC = UIAlertController(title: "Unable to load markets", message: "Unable to retrieve Markets within this area", preferredStyle: .alert)
+//                self.present(alertVC, animated: true)
+//            }
+        
+
+        MarketService.getMarkets(zip: "94102") { (result) in
+            switch result {
+            case .success(let completedMarkets):
+                self.markets = completedMarkets
+            case .failure(let error):
+                print("Error: \(error)")
+                let alertVC = UIAlertController(title: "Unable to load markets", message: "Unable to retrieve Markets within this area", preferredStyle: .alert)
+                self.present(alertVC, animated: true)
+                
+            }
+        }
+
+        
+
+        }
     
     private func setupMap() {
         let mapView = marketMap

@@ -8,15 +8,22 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate {
-    var markets = [Market]()
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate  {
+    
+    var locationManager = CLLocationManager()
+    
     
     var marketMap: MKMapView {
         let mapView = MKMapView()
         mapView.mapType = MKMapType.standard
+        mapView.delegate = self
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+        mapView.setUserTrackingMode(.follow, animated: true)
         mapView.center = view.center
         return mapView
     }
@@ -25,52 +32,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupMap()
-//        MarketService.getMarkets(zip: "94102") { (result) in
-//            switch result {
-//            case .success(let idMarkets):
-//                for element in idMarkets{
-//                    MarketService.getMarketInformation(market: element, completion: { (result) in
-//                        switch result{
-//                        case .success(let market):
-//
-//                            GeocodingService.getLocationInfo(market: market) { (result) in
-//                                switch result{
-//                                case .success(let finalMarket):
-//                                    print("Market \(market)")
-//                                    self.markets.append(market)
-//                                case .failure(let error):
-//                                    print("Something went wrong \(error.localizedDescription)")
-//                                }
-//                            }
-//                        case .failure:
-//                            let alertVC = UIAlertController(title: "Unable to load markets", message: "Unable to retrieve Markets within this area", preferredStyle: .alert)
-//                            self.present(alertVC, animated: true)
-//                        }
-//
-//                    })
-//                }
-//            case .failure(let error):
-//                print("Error: \(error)")
-//                let alertVC = UIAlertController(title: "Unable to load markets", message: "Unable to retrieve Markets within this area", preferredStyle: .alert)
-//                self.present(alertVC, animated: true)
-//            }
-        
-
-        MarketService.getMarkets(zip: "94102") { (result) in
-            switch result {
-            case .success(let completedMarkets):
-                self.markets = completedMarkets
-            case .failure(let error):
-                print("Error: \(error)")
-                let alertVC = UIAlertController(title: "Unable to load markets", message: "Unable to retrieve Markets within this area", preferredStyle: .alert)
-                self.present(alertVC, animated: true)
-                
-            }
-        }
-
-        
-
-        }
+        showLocation()
+    }
     
     private func setupMap() {
         let mapView = marketMap
@@ -83,5 +46,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
         
+    }
+    
+    private func showLocation() {
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // Check for Location Services
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
+        //Zoom to user location
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 500, longitudinalMeters: 500)
+            marketMap.setRegion(viewRegion, animated: true)
+        }
+        
+        DispatchQueue.main.async {
+            self.locationManager.startUpdatingLocation()
+        }
     }
 }

@@ -15,6 +15,8 @@
 		7A45D8C42200C4F600392E53 /* Produce_Pal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8C22200C4F600392E53 /* Produce_Pal.xcdatamodeld */; };
 		7A45D8C62200C4FA00392E53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A45D8C52200C4FA00392E53 /* Assets.xcassets */; };
 		7A45D8C92200C4FA00392E53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A45D8C72200C4FA00392E53 /* LaunchScreen.storyboard */; };
+		7A77F0E5220659EA000DFFFA /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A77F0E4220659EA000DFFFA /* GeocodingService.swift */; };
+		7A77F0E822076D96000DFFFA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A77F0E722076D96000DFFFA /* String.swift */; };
 		7AFB02B122037D0A00868D61 /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B022037D0A00868D61 /* Market.swift */; };
 		7AFB02B422037D4200868D61 /* MarketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B322037D4200868D61 /* MarketService.swift */; };
 		7AFB02B722037E3900868D61 /* ProdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B622037E3900868D61 /* ProdError.swift */; };
@@ -34,6 +36,8 @@
 		7A45D8C52200C4FA00392E53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A45D8C82200C4FA00392E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A45D8CA2200C4FA00392E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A77F0E4220659EA000DFFFA /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
+		7A77F0E722076D96000DFFFA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7AFB02B022037D0A00868D61 /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		7AFB02B322037D4200868D61 /* MarketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketService.swift; sourceTree = "<group>"; };
 		7AFB02B622037E3900868D61 /* ProdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdError.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 		7A45D8BA2200C4F600392E53 /* Produce Pal */ = {
 			isa = PBXGroup;
 			children = (
+				7A77F0E622076D83000DFFFA /* Extensions */,
 				7AFB02B822037E9700868D61 /* Constants */,
 				7AFB02B522037DF400868D61 /* Errors */,
 				7AFB02B222037D1400868D61 /* Services */,
@@ -99,6 +104,14 @@
 				7A45D8C22200C4F600392E53 /* Produce_Pal.xcdatamodeld */,
 			);
 			path = "Produce Pal";
+			sourceTree = "<group>";
+		};
+		7A77F0E622076D83000DFFFA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7A77F0E722076D96000DFFFA /* String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7AFB02A62203760A00868D61 /* View */ = {
@@ -130,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				7AFB02B322037D4200868D61 /* MarketService.swift */,
+				7A77F0E4220659EA000DFFFA /* GeocodingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -309,7 +323,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A45D8BE2200C4F600392E53 /* MapViewController.swift in Sources */,
+				7A77F0E5220659EA000DFFFA /* GeocodingService.swift in Sources */,
 				7A45D8C42200C4F600392E53 /* Produce_Pal.xcdatamodeld in Sources */,
+				7A77F0E822076D96000DFFFA /* String.swift in Sources */,
 				7A45D8BC2200C4F600392E53 /* AppDelegate.swift in Sources */,
 				7AFB02B722037E3900868D61 /* ProdError.swift in Sources */,
 				7AFB02B122037D0A00868D61 /* Market.swift in Sources */,

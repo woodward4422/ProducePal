@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2832AC7322067A58003DB753 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2832AC7222067A57003DB753 /* CoreLocation.framework */; };
 		28BF374D2203778A00923702 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BF374C2203778A00923702 /* MapKit.framework */; };
 		7A45D8BC2200C4F600392E53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8BB2200C4F600392E53 /* AppDelegate.swift */; };
 		7A45D8BE2200C4F600392E53 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8BD2200C4F600392E53 /* MapViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2832AC7222067A57003DB753 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		28BF374C2203778A00923702 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5AF2CCCD3BE6DFA38896FD91 /* Pods-Produce Pal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Produce Pal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Produce Pal/Pods-Produce Pal.debug.xcconfig"; sourceTree = "<group>"; };
 		7A45D8B82200C4F600392E53 /* Produce Pal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Produce Pal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2832AC7322067A58003DB753 /* CoreLocation.framework in Frameworks */,
 				28BF374D2203778A00923702 /* MapKit.framework in Frameworks */,
 				F8759B5BDB905EFE08A7FF94 /* Pods_Produce_Pal.framework in Frameworks */,
 			);
@@ -56,6 +59,7 @@
 		73156832F2F81B10903A1F2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2832AC7222067A57003DB753 /* CoreLocation.framework */,
 				28BF374C2203778A00923702 /* MapKit.framework */,
 				C64DC0C49FA536E2EF8C8042 /* Pods_Produce_Pal.framework */,
 			);
@@ -458,7 +462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QBGPXWFD5T;
+				DEVELOPMENT_TEAM = FBPU586293;
 				INFOPLIST_FILE = "Produce Pal/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -477,7 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QBGPXWFD5T;
+				DEVELOPMENT_TEAM = FBPU586293;
 				INFOPLIST_FILE = "Produce Pal/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

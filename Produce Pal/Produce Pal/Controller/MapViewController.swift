@@ -8,14 +8,22 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate  {
+
+    var locationManager = CLLocationManager()
     
+
     var marketMap: MKMapView {
         let mapView = MKMapView()
         mapView.mapType = MKMapType.standard
+        mapView.delegate = self
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+        mapView.setUserTrackingMode(.follow, animated: true)
         mapView.center = view.center
         return mapView
     }
@@ -24,6 +32,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupMap()
+        showLocation()
     }
     
     private func setupMap() {
@@ -37,5 +46,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
         
+    }
+    
+    private func showLocation() {
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // Check for Location Services
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
+        //Zoom to user location
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 500, longitudinalMeters: 500)
+            marketMap.setRegion(viewRegion, animated: true)
+        }
+        
+        DispatchQueue.main.async {
+            self.locationManager.startUpdatingLocation()
+        }
     }
 }

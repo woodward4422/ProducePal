@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2832AC7322067A58003DB753 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2832AC7222067A57003DB753 /* CoreLocation.framework */; };
+		28707EF52210E31E003B08D8 /* MarketDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28707EF42210E31E003B08D8 /* MarketDetailsViewController.swift */; };
 		28BF374D2203778A00923702 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BF374C2203778A00923702 /* MapKit.framework */; };
 		7A45D8BC2200C4F600392E53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8BB2200C4F600392E53 /* AppDelegate.swift */; };
 		7A45D8BE2200C4F600392E53 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8BD2200C4F600392E53 /* MapViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		2832AC7222067A57003DB753 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		28707EF42210E31E003B08D8 /* MarketDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailsViewController.swift; sourceTree = "<group>"; };
 		28BF374C2203778A00923702 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5AF2CCCD3BE6DFA38896FD91 /* Pods-Produce Pal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Produce Pal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Produce Pal/Pods-Produce Pal.debug.xcconfig"; sourceTree = "<group>"; };
 		7A45D8B82200C4F600392E53 /* Produce Pal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Produce Pal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				7A45D8BD2200C4F600392E53 /* MapViewController.swift */,
+				28707EF42210E31E003B08D8 /* MarketDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				7AFB02B122037D0A00868D61 /* Market.swift in Sources */,
 				7AFB02B422037D4200868D61 /* MarketService.swift in Sources */,
 				7AFB02BA22037EEA00868D61 /* API.swift in Sources */,
+				28707EF52210E31E003B08D8 /* MarketDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

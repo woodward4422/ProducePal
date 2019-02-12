@@ -92,49 +92,49 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     }
     
     func loadAnnotations(){
-//        print(self.markets)
-//        let geocoder = CLGeocoder()
-//        guard let unwrappedMarkets = markets else {return}
-//        let dpg = DispatchGroup()
-//        for item in unwrappedMarkets{
-//            dpg.enter()
-//            guard let location = item.location else { continue }
-//            geocoder.geocodeAddressString(location) { [weak self] (placemarks, err) in
-//                print("Before Dispatch group leave")
-//                if let placemark = placemarks?.first, let location = placemark.location {
-//
-//                    let mark = MKPlacemark(placemark: placemark)
-//                    print("Mark: \(mark)")
-//                    self?.marketMap.addAnnotation(mark)
-//                    dpg.leave()
-//                }
-//            }
-//
-//        }
-//        dpg.notify(queue: .main) {
-//            print("Finished!")
-//        }
-        
+        print(self.markets)
         guard let unwrappedMarkets = markets else {return}
-        let geocoder = CLGeocoder()
+        let dpg = DispatchGroup()
+        for item in unwrappedMarkets{
+            dpg.enter()
+            guard let location = item.location else { continue }
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(location) { [weak self] (placemarks, err) in
+                print("Before Dispatch group leave")
+                if let placemark = placemarks?.first, let location = placemark.location {
+
+                    let mark = MKPlacemark(placemark: placemark)
+                    print("Mark: \(mark)")
+                    self?.marketMap.addAnnotation(mark)
+                    dpg.leave()
+                }
+            }
+
+        }
+        dpg.notify(queue: .main) {
+            print("Finished!")
+        }
+
+//        guard let unwrappedMarkets = markets else {return}
+//        let geocoder = CLGeocoder()
 
         
-        geocoder.geocodeAddressString(unwrappedMarkets[0].location!) { [weak self] (placemarks, err) in
-            if let placemark = placemarks?.first, let location = placemark.location {
-                location.coordinate.latitude
-                print("Location: \(location)")
-                let anno = MKPointAnnotation()
-                anno.coordinate = location.coordinate
-//                let mark = MKPlacemark(placemark: placemark)
-//                print("Mark: \(mark)")
-                print("anno: \(anno)")
-                anno.title = "Please work"
-                self?.marketMap.addAnnotation(anno)
-//                self?.marketMap.showAnnotations([anno], animated: true)
-                print(self?.marketMap.annotations)
-
-            }
-        }
+//        geocoder.geocodeAddressString(unwrappedMarkets[0].location!) { [weak self] (placemarks, err) in
+//            if let placemark = placemarks?.first, let location = placemark.location {
+//                location.coordinate.latitude
+//                print("Location: \(location)")
+//                let anno = MKPointAnnotation()
+//                anno.coordinate = location.coordinate
+////                let mark = MKPlacemark(placemark: placemark)
+////                print("Mark: \(mark)")
+//                print("anno: \(anno)")
+//                anno.title = "Please work"
+//                self?.marketMap.addAnnotation(anno)
+////                self?.marketMap.showAnnotations([anno], animated: true)
+//                print(self?.marketMap.annotations)
+//
+//            }
+//        }
         
         
         

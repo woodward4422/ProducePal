@@ -16,18 +16,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     var markets: [Market]?
     
     
-    var marketMap: MKMapView {
+    private let marketMap: MKMapView = {
         let mapView = MKMapView()
         mapView.mapType = MKMapType.standard
-        mapView.delegate = self
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
         mapView.setUserTrackingMode(.follow, animated: true)
-        mapView.center = view.center
         return mapView
-    }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,20 +48,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     }
     
     private func setupMap() {
-        let mapView = marketMap
-        view.addSubview(mapView)
+        view.addSubview(marketMap)
         
         let leftMargin:CGFloat = 0
         let topMargin:CGFloat = 0
         let mapWidth:CGFloat = view.frame.size.width
         let mapHeight:CGFloat = view.frame.size.height
+        marketMap.center = view.center
+//        marketMap.delegate = self
         
-        mapView.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
+        marketMap.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
         
     }
     
     private func showLocation() {
         
+        let locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
@@ -73,7 +73,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
             locationManager.requestWhenInUseAuthorization()
         }
         
-
+        //Zoom to user location
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1200, longitudinalMeters: 1200)
+            marketMap.setRegion(viewRegion, animated: false)
+        }
+        
+        self.locationManager = locationManager
+        
+        DispatchQueue.main.async {
+            self.locationManager.startUpdatingLocation()
+        }
     }
     
     func loadData(zip: String){
@@ -120,7 +130,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
                 print("anno: \(anno)")
                 anno.title = "Please work"
                 self?.marketMap.addAnnotation(anno)
-                self?.marketMap.showAnnotations([anno], animated: true)
+//                self?.marketMap.showAnnotations([anno], animated: true)
                 print(self?.marketMap.annotations)
 
             }
@@ -128,28 +138,5 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         
         
         
-    }
-}
-
-
-extension MapViewController : MKMapViewDelegate{
-    //Adjusting the zoom
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        var region = MKCoordinateRegion()
-        region.span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05); //Zoom distance
-        let coordinate = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude:  userLocation.coordinate.longitude)
-        region.center = coordinate
-        mapView.setRegion(region, animated: true)
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        return MKAnnotationView(annotation: annotation, reuseIdentifier: "hello")
-    }
-    
-    func mapViewWillStartLocatingUser(_ mapView: MKMapView) {
-        debugPrint("startLocating")
-    }
-    func mapViewDidStopLocatingUser(_ mapView: MKMapView) {
-        debugPrint("stopLocating")
     }
 }

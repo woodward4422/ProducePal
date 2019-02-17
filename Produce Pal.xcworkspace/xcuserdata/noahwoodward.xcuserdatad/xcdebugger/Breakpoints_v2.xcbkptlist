@@ -90,13 +90,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571093300.97495"
+            timestampString = "571731388.963617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "132"
             endingLineNumber = "132"
-            landmarkName = "MapViewController"
-            landmarkType = "3">
+            landmarkName = "loadAnnotations()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -378,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571093300.983502"
+            timestampString = "571731388.972687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -394,7 +394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571093300.9846849"
+            timestampString = "571731388.973103"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -410,13 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571093300.98576"
+            timestampString = "571731388.9736069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "mapView(_:viewFor:)"
-            landmarkType = "7">
+            startingLineNumber = "143"
+            endingLineNumber = "143">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

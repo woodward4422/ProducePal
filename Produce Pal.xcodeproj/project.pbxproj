@@ -11,13 +11,13 @@
 		28707EF52210E31E003B08D8 /* MarketDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28707EF42210E31E003B08D8 /* MarketDetailsViewController.swift */; };
 		28BF374D2203778A00923702 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BF374C2203778A00923702 /* MapKit.framework */; };
 		7A45D8BC2200C4F600392E53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8BB2200C4F600392E53 /* AppDelegate.swift */; };
-		7A45D8BE2200C4F600392E53 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8BD2200C4F600392E53 /* MapViewController.swift */; };
 		7A45D8C12200C4F600392E53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A45D8BF2200C4F600392E53 /* Main.storyboard */; };
 		7A45D8C42200C4F600392E53 /* Produce_Pal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A45D8C22200C4F600392E53 /* Produce_Pal.xcdatamodeld */; };
 		7A45D8C62200C4FA00392E53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A45D8C52200C4FA00392E53 /* Assets.xcassets */; };
 		7A45D8C92200C4FA00392E53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A45D8C72200C4FA00392E53 /* LaunchScreen.storyboard */; };
 		7A77F0E5220659EA000DFFFA /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A77F0E4220659EA000DFFFA /* GeocodingService.swift */; };
 		7A77F0E822076D96000DFFFA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A77F0E722076D96000DFFFA /* String.swift */; };
+		7A7E528922190DC600D44906 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7E528822190DC600D44906 /* MapViewController.swift */; };
 		7AFB02B122037D0A00868D61 /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B022037D0A00868D61 /* Market.swift */; };
 		7AFB02B422037D4200868D61 /* MarketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B322037D4200868D61 /* MarketService.swift */; };
 		7AFB02B722037E3900868D61 /* ProdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB02B622037E3900868D61 /* ProdError.swift */; };
@@ -32,7 +32,6 @@
 		5AF2CCCD3BE6DFA38896FD91 /* Pods-Produce Pal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Produce Pal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Produce Pal/Pods-Produce Pal.debug.xcconfig"; sourceTree = "<group>"; };
 		7A45D8B82200C4F600392E53 /* Produce Pal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Produce Pal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A45D8BB2200C4F600392E53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7A45D8BD2200C4F600392E53 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7A45D8C02200C4F600392E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A45D8C32200C4F600392E53 /* Produce_Pal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Produce_Pal.xcdatamodel; sourceTree = "<group>"; };
 		7A45D8C52200C4FA00392E53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +39,7 @@
 		7A45D8CA2200C4FA00392E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A77F0E4220659EA000DFFFA /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
 		7A77F0E722076D96000DFFFA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		7A7E528822190DC600D44906 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7AFB02B022037D0A00868D61 /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		7AFB02B322037D4200868D61 /* MarketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketService.swift; sourceTree = "<group>"; };
 		7AFB02B622037E3900868D61 /* ProdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdError.swift; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 		7AFB02A72203760F00868D61 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7A45D8BD2200C4F600392E53 /* MapViewController.swift */,
+				7A7E528822190DC600D44906 /* MapViewController.swift */,
 				28707EF42210E31E003B08D8 /* MarketDetailsViewController.swift */,
 			);
 			path = Controller;
@@ -325,10 +325,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A45D8BE2200C4F600392E53 /* MapViewController.swift in Sources */,
 				7A77F0E5220659EA000DFFFA /* GeocodingService.swift in Sources */,
 				7A45D8C42200C4F600392E53 /* Produce_Pal.xcdatamodeld in Sources */,
 				7A77F0E822076D96000DFFFA /* String.swift in Sources */,
+				7A7E528922190DC600D44906 /* MapViewController.swift in Sources */,
 				7A45D8BC2200C4F600392E53 /* AppDelegate.swift in Sources */,
 				7AFB02B722037E3900868D61 /* ProdError.swift in Sources */,
 				7AFB02B122037D0A00868D61 /* Market.swift in Sources */,

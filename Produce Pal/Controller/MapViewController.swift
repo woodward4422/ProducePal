@@ -16,7 +16,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     var markets: [Market]?
     var userZIP: String?
     
-    
     private let marketMap: MKMapView = {
         let mapView = MKMapView()
         mapView.mapType = MKMapType.standard
@@ -28,11 +27,78 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         return mapView
     }()
     
+    private let marketDetail: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 20
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var previewAllDetails: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [previewTextDetails,moreInfoButton])
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var previewTextDetails: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [previewTitleDetails,previewHoursDetails])
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let previewTitleDetails: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.text = "Market Title"
+        label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let previewHoursDetails: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.text = "8:00AM - 1:00PM"
+        label.font = UIFont(name: "HelveticaNeue", size: 15)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let moreInfoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("View More", for: .normal)
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 18)
+        button.layer.cornerRadius = 10
+        button.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.addTarget(self, action: #selector(pushToMarketDetails), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc private func pushToMarketDetails(sender: UIButton) {
+        let marketDetailViewController = MarketDetailsViewController()
+        self.present(marketDetailViewController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.setupMap()
         self.showLocation()
+        self.setupMarketPreview()
 
         
     }
@@ -45,7 +111,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         let mapWidth:CGFloat = view.frame.size.width
         let mapHeight:CGFloat = view.frame.size.height
         marketMap.center = view.center
-//        marketMap.delegate = self
+        marketMap.delegate = self
         
         marketMap.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
         
@@ -100,7 +166,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         self.locationManager = locationManager
         
         
-        
+        		
         DispatchQueue.main.async {
             self.locationManager.startUpdatingLocation()
         }
@@ -179,8 +245,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
 //            }
 //        }
         
+    }
+    
+    private func setupMarketPreview() {
+        marketMap.addSubview(marketDetail)
+        marketDetail.addSubview(previewAllDetails)
         
+        NSLayoutConstraint.activate([
+            marketDetail.topAnchor.constraint(equalTo: marketMap.topAnchor, constant: 720),
+            marketDetail.leadingAnchor.constraint(equalTo: marketMap.leadingAnchor, constant: 20),
+            marketDetail.trailingAnchor.constraint(equalTo: marketMap.trailingAnchor, constant: -20),
+            marketDetail.bottomAnchor.constraint(equalTo: marketMap.bottomAnchor, constant: -50),
+            
+            previewAllDetails.topAnchor.constraint(equalTo: marketDetail.topAnchor),
+            previewAllDetails.leadingAnchor.constraint(equalTo: marketDetail.leadingAnchor, constant: 25),
+            previewAllDetails.trailingAnchor.constraint(equalTo: marketDetail.trailingAnchor, constant: -25),
+            previewAllDetails.bottomAnchor.constraint(equalTo: marketDetail.bottomAnchor)
+            ])
         
     }
     
+}
+
+extension MapViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        marketDetail.isHidden = false
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        marketDetail.isHidden = true
+    }
 }

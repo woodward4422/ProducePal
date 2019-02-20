@@ -13,7 +13,7 @@ class MarketDetailsViewController: UIViewController {
     // MARK: - Labels for the Market Details
     
     private lazy var marketDetailStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [marketTitle, addressLabel, seasonAndHourTitle, productsTitle])
+        let stackView = UIStackView(arrangedSubviews: [dismissButton,marketTitle, addressLabel, seasonAndHourTitle, productsTitle])
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -21,6 +21,18 @@ class MarketDetailsViewController: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    private let dismissButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Back", for: .normal)
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 12)
+        button.layer.cornerRadius = 10
+        button.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.addTarget(self, action: #selector(dismissToMap), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let marketTitle: UILabel = {
@@ -156,6 +168,11 @@ class MarketDetailsViewController: UIViewController {
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
+    
+    @objc private func dismissToMap(sender: UIButton) {
+//        let marketViewController = MapViewController()
+        self.dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

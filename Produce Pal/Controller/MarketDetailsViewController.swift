@@ -110,6 +110,7 @@ class MarketDetailsViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         return stackView
     }()
     

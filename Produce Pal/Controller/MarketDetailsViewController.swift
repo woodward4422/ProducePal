@@ -12,6 +12,8 @@ class MarketDetailsViewController: UIViewController {
     
     // MARK: - Labels for the Market Details
     
+    var selectedMarket: Market?
+    
     private lazy var marketDetailStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [marketTitle, addressLabel, seasonAndHourTitle, productsTitle])
         stackView.alignment = .fill
@@ -170,9 +172,18 @@ class MarketDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupLayout()
+        configureDataSources()
         view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     }
-    
+    private func configureDataSources() {
+        guard let market = selectedMarket else {fatalError("This is a very grave mistake")}
+        marketTitle.text = market.name
+        productsTitle.text = market.products
+        addressLabel.text = market.location
+        seasonLabel.text = market.time
+        
+        
+    }
     private func setupLayout() {
         let informationContainerView = UIView()
         informationContainerView.translatesAutoresizingMaskIntoConstraints = false

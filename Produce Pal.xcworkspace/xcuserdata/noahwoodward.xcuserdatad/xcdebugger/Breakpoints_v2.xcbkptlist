@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571731388.963617"
+            timestampString = "572767301.128572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "loadAnnotations()"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "showLocation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -378,12 +378,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571731388.972687"
+            timestampString = "572767301.128767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "marketDetailView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Produce Pal/Controller/MapViewController.swift"
+            timestampString = "572767301.128827"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "setupMap()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -394,11 +410,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571731388.973103"
+            timestampString = "572767301.12888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "showLocation()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Produce_Pal.MapViewController.(showLocation in _0823E738356EC1459C24B3591FD55028)() -&gt; ()"
+                  moduleName = "Produce Pal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/noahwoodward/MakeSchool/ProducePal-iOS/Produce%20Pal/Controller/MapViewController.swift"
+                  timestampString = "572765757.653019"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "148"
+                  endingLineNumber = "148"
+                  offsetFromSymbolStart = "1076">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CLPlacemark&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Produce_Pal.MapViewController.(showLocation in _0823E738356EC1459C24B3591FD55028)() -&gt; ()"
+                  moduleName = "Produce Pal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/noahwoodward/MakeSchool/ProducePal-iOS/Produce%20Pal/Controller/MapViewController.swift"
+                  timestampString = "572765757.655911"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Produce Pal/Controller/MapViewController.swift"
+            timestampString = "572767301.128931"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "loadData(zip:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -406,17 +470,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Produce Pal/Controller/MapViewController.swift"
-            timestampString = "571731388.9736069"
+            timestampString = "572767301.128979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "loadAnnotations()"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "mapView(_:didSelect:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Produce Pal/Controller/MapViewController.swift"
+            timestampString = "572767301.129029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "MapViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

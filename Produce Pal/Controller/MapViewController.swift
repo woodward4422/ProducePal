@@ -15,6 +15,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     var locationManager = CLLocationManager()
     var markets: [Market]?
     var userZIP: String?
+    private var selectedMarket: Market?
     
     private let marketMap: MKMapView = {
         let mapView = MKMapView()
@@ -89,7 +90,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     }()
     
     @objc private func pushToMarketDetails(sender: UIButton) {
+        guard let selected = selectedMarket else {fatalError("No Selected Market")}
+        
         let marketDetailViewController = MarketDetailsViewController()
+        marketDetailViewController.selectedMarket = selected
         self.present(marketDetailViewController, animated: true, completion: nil)
     }
     
@@ -97,6 +101,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.setupMap()
+        self.sanitizeMarkets()
         self.showLocation()
         self.setupMarketPreview()
 
@@ -114,6 +119,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         marketMap.delegate = self
         
         marketMap.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
+        
+    }
+    
+    private func sanitizeMarkets(){
         
     }
     
@@ -178,6 +187,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
             switch result{
             case .success(let loadedMarkets):
                 self.markets = loadedMarkets
+                for i in 0..<self.markets!.count{
+                    var marketName = self.markets![i].name
+                    for _ in 0..<3 {
+                        marketName.remove(at: marketName.startIndex)
+                    }
+                    
+                    self.markets![i].name = marketName
+                }
             case .failure(let _):
                 let alertVC = UIAlertController(title: "Couldent load markets", message: "Try again later, we are sorry", preferredStyle: UIAlertController.Style.alert)
                 self.present(alertVC, animated: true)
@@ -207,9 +224,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
             geocoder.geocodeAddressString(location) { [weak self] (placemarks, err) in
                 if let placemark = placemarks?.first, let location = placemark.location {
                     var marketName = item.name
-                    for i in 0..<3 {
-                        marketName.remove(at: marketName.startIndex)
-                    }
                     let mark = MKPlacemark(placemark: placemark)
                     let annotation = MKPointAnnotation()
                     annotation.title = marketName
@@ -276,9 +290,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
 extension MapViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         marketDetailView.isHidden = false
+        let selected = mapView.selectedAnnotations
+        guard let marketsUnwrapped = self.markets else {fatalError("Really thinking this case is impossible")}
+        let filteredMarket = marketsUnwrapped.filter {$0.name == selected[0].title }
+        self.selectedMarket = filteredMarket[0]
+        previewTitleDetails.text = filteredMarket[0].name
+        previewSeasonalDetails.text = filteredMarket[0].time
+
+        
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         marketDetailView.isHidden = true
+
+   
+    
+    
     }
+    
+
 }

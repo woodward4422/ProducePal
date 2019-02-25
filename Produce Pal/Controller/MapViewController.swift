@@ -27,33 +27,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         return mapView
     }()
     
-    private let marketDetail: UIView = {
-        let view = UIView()
+    private let marketDetailView: UIControl = {
+        let view = UIControl()
         view.backgroundColor = .white
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 7
         view.isHidden = true
+        view.addTarget(self, action: #selector(pushToMarketDetails), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var previewAllDetails: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [previewTextDetails,moreInfoButton])
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private let previewMarketImage: UIImageView = {
+        let image = UIImageView()
+        image.image = #imageLiteral(resourceName: "Market")
+        image.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        image.layer.cornerRadius = 7
+        image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
     }()
     
-    private lazy var previewTextDetails: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [previewTitleDetails,previewHoursDetails])
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var previewDetails: UIStackView = {
+        let previewStackView = UIStackView(arrangedSubviews: [previewTitleDetails, previewSeasonalDetails, previewHoursDetails])
+        previewStackView.alignment = .fill
+        previewStackView.distribution = .fillEqually
+        previewStackView.axis = .vertical
+        previewStackView.spacing = 13
+        previewStackView.isUserInteractionEnabled = false
+        previewStackView.translatesAutoresizingMaskIntoConstraints = false
+        return previewStackView
     }()
     
     private let previewTitleDetails: UILabel = {
@@ -61,6 +63,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         label.textAlignment = .left
         label.text = "Market Title"
         label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let previewSeasonalDetails: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.text = "Year Round"
+        label.font = UIFont(name: "HelveticaNeue", size: 15)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -74,18 +86,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    
-    private let moreInfoButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("View More", for: .normal)
-        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 18)
-        button.layer.cornerRadius = 10
-        button.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
-        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        button.addTarget(self, action: #selector(pushToMarketDetails), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
     
     @objc private func pushToMarketDetails(sender: UIButton) {
@@ -248,19 +248,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     }
     
     private func setupMarketPreview() {
-        marketMap.addSubview(marketDetail)
-        marketDetail.addSubview(previewAllDetails)
+        marketMap.addSubview(marketDetailView)
+        marketDetailView.addSubview(previewDetails)
+        marketDetailView.addSubview(previewMarketImage)
+        
         
         NSLayoutConstraint.activate([
-            marketDetail.topAnchor.constraint(equalTo: marketMap.topAnchor, constant: 720),
-            marketDetail.leadingAnchor.constraint(equalTo: marketMap.leadingAnchor, constant: 20),
-            marketDetail.trailingAnchor.constraint(equalTo: marketMap.trailingAnchor, constant: -20),
-            marketDetail.bottomAnchor.constraint(equalTo: marketMap.bottomAnchor, constant: -50),
+            marketDetailView.heightAnchor.constraint(equalTo: marketMap.heightAnchor, multiplier: 0.13),
+            marketDetailView.leadingAnchor.constraint(equalTo: marketMap.leadingAnchor, constant: 20),
+            marketDetailView.trailingAnchor.constraint(equalTo: marketMap.trailingAnchor, constant: -20),
+            marketDetailView.bottomAnchor.constraint(equalTo: marketMap.bottomAnchor, constant: -50),
             
-            previewAllDetails.topAnchor.constraint(equalTo: marketDetail.topAnchor),
-            previewAllDetails.leadingAnchor.constraint(equalTo: marketDetail.leadingAnchor, constant: 25),
-            previewAllDetails.trailingAnchor.constraint(equalTo: marketDetail.trailingAnchor, constant: -25),
-            previewAllDetails.bottomAnchor.constraint(equalTo: marketDetail.bottomAnchor)
+            previewDetails.heightAnchor.constraint(equalTo: marketDetailView.heightAnchor, multiplier: 0.65),
+            previewDetails.leadingAnchor.constraint(equalTo: previewMarketImage.trailingAnchor, constant: 60),
+            previewDetails.trailingAnchor.constraint(equalTo: marketDetailView.trailingAnchor, constant: -20),
+            previewDetails.bottomAnchor.constraint(equalTo: marketDetailView.bottomAnchor, constant: -20),
+            
+            previewMarketImage.heightAnchor.constraint(equalTo: marketDetailView.heightAnchor),
+            previewMarketImage.leadingAnchor.constraint(equalTo: marketDetailView.leadingAnchor),
+            previewMarketImage.widthAnchor.constraint(equalTo: marketDetailView.widthAnchor, multiplier: 0.32)
             ])
         
     }
@@ -269,10 +275,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
 
 extension MapViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        marketDetail.isHidden = false
+        marketDetailView.isHidden = false
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        marketDetail.isHidden = true
+        marketDetailView.isHidden = true
     }
 }

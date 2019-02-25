@@ -13,7 +13,7 @@ class MarketDetailsViewController: UIViewController {
     // MARK: - Labels for the Market Details
     
     private lazy var marketDetailStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [dismissButton,marketTitle, addressLabel, seasonAndHourTitle, productsTitle])
+        let stackView = UIStackView(arrangedSubviews: [marketTitle, addressLabel, seasonAndHourTitle, productsTitle])
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -57,15 +57,6 @@ class MarketDetailsViewController: UIViewController {
     
     // MARK: - Labels for Address/Distance/Button
     
-    private lazy var addressDistanceDirection: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [addressDistance,directionIcon])
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
     
     private lazy var addressDistance: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [addressLabel,distanceLabel])
@@ -99,9 +90,10 @@ class MarketDetailsViewController: UIViewController {
     }()
     
     private let directionIcon: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "Direction Icon"))
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "Direction Icon")
+        imageView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -170,7 +162,6 @@ class MarketDetailsViewController: UIViewController {
     }()
     
     @objc private func dismissToMap(sender: UIButton) {
-//        let marketViewController = MapViewController()
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -189,30 +180,40 @@ class MarketDetailsViewController: UIViewController {
         
         informationContainerView.addSubview(marketDetailStackView)
         informationContainerView.addSubview(seasonHourDayStackView)
-        informationContainerView.addSubview(addressDistanceDirection)
+        informationContainerView.addSubview(addressDistance)
+        informationContainerView.addSubview(dismissButton)
+        informationContainerView.addSubview(directionIcon)
         
         NSLayoutConstraint.activate([
             
             informationContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             informationContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             informationContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            informationContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
+            informationContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
             
-            addressDistanceDirection.topAnchor.constraint(equalTo: marketTitle.bottomAnchor),
-            addressDistanceDirection.leadingAnchor.constraint(equalTo: marketTitle.leadingAnchor),
-            addressDistanceDirection.trailingAnchor.constraint(equalTo: marketTitle.trailingAnchor),
-            
-            
+            dismissButton.heightAnchor.constraint(equalTo: informationContainerView.heightAnchor, multiplier: 0.05),
+            dismissButton.leadingAnchor.constraint(equalTo: marketDetailStackView.leadingAnchor),
+            dismissButton.bottomAnchor.constraint(equalTo: marketDetailStackView.topAnchor),
             
             marketDetailStackView.topAnchor.constraint(equalTo: informationContainerView.topAnchor, constant: 20),
             marketDetailStackView.leadingAnchor.constraint(equalTo: informationContainerView.leadingAnchor, constant: 20),
             marketDetailStackView.trailingAnchor.constraint(equalTo: informationContainerView.trailingAnchor),
             marketDetailStackView.bottomAnchor.constraint(equalTo: informationContainerView.bottomAnchor),
             
-            seasonHourDayStackView.topAnchor.constraint(equalTo: seasonAndHourTitle.topAnchor, constant: 65),
+            addressDistance.topAnchor.constraint(equalTo: marketTitle.bottomAnchor),
+            addressDistance.leadingAnchor.constraint(equalTo: marketTitle.leadingAnchor),
+            addressDistance.trailingAnchor.constraint(equalTo: marketTitle.trailingAnchor),
+            
+            directionIcon.heightAnchor.constraint(equalTo: informationContainerView.heightAnchor, multiplier: 0.08),
+            directionIcon.leadingAnchor.constraint(equalTo: addressDistance.leadingAnchor, constant: 295),
+            directionIcon.trailingAnchor.constraint(equalTo: addressDistance.trailingAnchor, constant: -20),
+            directionIcon.bottomAnchor.constraint(equalTo: addressDistance.topAnchor, constant: 45),
+            
+            seasonHourDayStackView.heightAnchor.constraint(equalTo: seasonAndHourTitle.heightAnchor, multiplier: 0.4),
+            seasonHourDayStackView.topAnchor.constraint(equalTo: seasonAndHourTitle.bottomAnchor),
             seasonHourDayStackView.leadingAnchor.constraint(equalTo: seasonAndHourTitle.leadingAnchor),
-            seasonHourDayStackView.trailingAnchor.constraint(equalTo: seasonAndHourTitle.trailingAnchor),
-            seasonHourDayStackView.heightAnchor.constraint(equalTo: seasonAndHourTitle.heightAnchor, multiplier: 0.6)
+            seasonHourDayStackView.trailingAnchor.constraint(equalTo: seasonAndHourTitle.trailingAnchor)
+            
             
             ])
     }

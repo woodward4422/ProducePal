@@ -49,11 +49,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     }()
     
     private lazy var previewDetails: UIStackView = {
-        let previewStackView = UIStackView(arrangedSubviews: [previewTitleDetails, previewSeasonalDetails, previewHoursDetails])
+        let previewStackView = UIStackView(arrangedSubviews: [previewTitleDetails, previewSeasonalDetails])
         previewStackView.alignment = .fill
         previewStackView.distribution = .fillEqually
         previewStackView.axis = .vertical
-        previewStackView.spacing = 13
+        previewStackView.spacing = 0
         previewStackView.isUserInteractionEnabled = false
         previewStackView.translatesAutoresizingMaskIntoConstraints = false
         return previewStackView
@@ -63,7 +63,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         let label = UILabel()
         label.textAlignment = .left
         label.text = "Market Title"
-        label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "HelveticaNeue", size: 15)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -73,17 +75,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         let label = UILabel()
         label.textAlignment = .left
         label.text = "Year Round"
-        label.font = UIFont(name: "HelveticaNeue", size: 15)
-        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let previewHoursDetails: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.text = "8:00AM - 1:00PM"
-        label.font = UIFont(name: "HelveticaNeue", size: 15)
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "HelveticaNeue", size: 13)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -104,8 +98,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         self.sanitizeMarkets()
         self.showLocation()
         self.setupMarketPreview()
-
-        
     }
     
     private func setupMap() {
@@ -170,12 +162,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
             
         }
         
-
-        
         self.locationManager = locationManager
         
-        
-        		
         DispatchQueue.main.async {
             self.locationManager.startUpdatingLocation()
         }
@@ -268,19 +256,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         
         
         NSLayoutConstraint.activate([
+            
             marketDetailView.heightAnchor.constraint(equalTo: marketMap.heightAnchor, multiplier: 0.13),
             marketDetailView.leadingAnchor.constraint(equalTo: marketMap.leadingAnchor, constant: 20),
             marketDetailView.trailingAnchor.constraint(equalTo: marketMap.trailingAnchor, constant: -20),
             marketDetailView.bottomAnchor.constraint(equalTo: marketMap.bottomAnchor, constant: -50),
             
             previewDetails.heightAnchor.constraint(equalTo: marketDetailView.heightAnchor, multiplier: 0.65),
-            previewDetails.leadingAnchor.constraint(equalTo: previewMarketImage.trailingAnchor, constant: 60),
+            previewDetails.leadingAnchor.constraint(equalTo: previewMarketImage.trailingAnchor, constant: 20),
             previewDetails.trailingAnchor.constraint(equalTo: marketDetailView.trailingAnchor, constant: -20),
             previewDetails.bottomAnchor.constraint(equalTo: marketDetailView.bottomAnchor, constant: -20),
             
             previewMarketImage.heightAnchor.constraint(equalTo: marketDetailView.heightAnchor),
             previewMarketImage.leadingAnchor.constraint(equalTo: marketDetailView.leadingAnchor),
             previewMarketImage.widthAnchor.constraint(equalTo: marketDetailView.widthAnchor, multiplier: 0.32)
+            
             ])
         
     }
@@ -294,18 +284,21 @@ extension MapViewController : MKMapViewDelegate {
         guard let marketsUnwrapped = self.markets else {fatalError("Really thinking this case is impossible")}
         let filteredMarket = marketsUnwrapped.filter {$0.name == selected[0].title }
         self.selectedMarket = filteredMarket[0]
-        previewTitleDetails.text = filteredMarket[0].name
-        previewSeasonalDetails.text = filteredMarket[0].time
+        
+        let timeString = filteredMarket[0].time
+        let cleanTimeLabel = timeString?.replace(string: "<br>", replacement: " ")
+        
+        let titleString = filteredMarket[0].name
+        let cleanTitleLabel = titleString.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        previewTitleDetails.text = cleanTitleLabel
+        previewSeasonalDetails.text = cleanTimeLabel
         
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         marketDetailView.isHidden = true
-
-   
-    
-    
+        
     }
     
 

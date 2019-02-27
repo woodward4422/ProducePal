@@ -15,7 +15,7 @@ class MarketDetailsViewController: UIViewController {
     var selectedMarket: Market?
     
     private lazy var marketDetailStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [marketTitle, addressLabel, seasonAndHourTitle, productsTitle])
+        let stackView = UIStackView(arrangedSubviews: [marketTitle, addressDirection, timeDetailsStackView, productDetails])
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -41,31 +41,22 @@ class MarketDetailsViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.text = "Market Title"
-        label.font = UIFont(name: "HelveticaNeue-Medium", size: 25)
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let productsTitle: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.text = "Products Offer"
-        label.font = UIFont(name: "HelveticaNeue-Medium", size: 16)
-        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    // MARK: - Labels for Address/Button
     
-    // MARK: - Labels for Address/Distance/Button
-    
-    
-    private lazy var addressDistance: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [addressLabel,distanceLabel])
+    private lazy var addressDirection: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [addressLabel,directionIcon])
         stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.distribution = .fillProportionally
+        stackView.axis = .horizontal
+        stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -74,18 +65,9 @@ class MarketDetailsViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 2
-        label.text = "3595 California St.\nSan Francisco, CA 94118"
-        label.font = UIFont(name: "HelveticaNeue-Medium", size: 13)
-        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let distanceLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.text = "0.4mi"
-        label.font = UIFont(name: "HelveticaNeue-Thin", size: 10)
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 16)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -94,32 +76,20 @@ class MarketDetailsViewController: UIViewController {
     private let directionIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "Direction Icon")
+        imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    
-    
     // MARK: - Labels for the seasonAndHour section
     
-    private lazy var seasonHourDayStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [seasonLabel,hoursAndDayLabel])
+    private lazy var timeDetailsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [seasonAndHourTitle,timeDetails])
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
-    }()
-    
-    private lazy var hoursAndDayLabel: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [dayInfoLabel, hoursLabel])
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
         stackView.axis = .vertical
-        stackView.spacing = 2
+        stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -134,33 +104,51 @@ class MarketDetailsViewController: UIViewController {
         return label
     }()
     
-    private let seasonLabel : UILabel = {
+    private let timeDetails : UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.text = "June - October"
+        label.text = "8:00 - 1:00"
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
         label.font = UIFont(name: "HelveticaNeue", size: 14)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let hoursLabel : UILabel = {
+    // MARK: - Labels for the Offered Products section
+    
+    private lazy var productDetails: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [productsTitle,productsOffered])
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let productsTitle: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
-        label.text = "8:00AM - 1:00PM"
-        label.font = UIFont(name: "HelveticaNeue", size: 11)
+        label.textAlignment = .left
+        label.text = "Products Offer"
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private let dayInfoLabel : UILabel = {
+
+    private let productsOffered: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
-        label.text = "Sundays"
-        label.font = UIFont(name: "HelveticaNeue", size: 11)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.text = "Baked Goods! ,ETC."
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -178,10 +166,17 @@ class MarketDetailsViewController: UIViewController {
     }
     private func configureDataSources() {
         guard let market = selectedMarket else {fatalError("This is a very grave mistake")}
-        marketTitle.text = market.name
-        productsTitle.text = market.products
+        
+        let titleString = market.name
+        let cleanTitleLabel = titleString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let timeString = market.time
+        let cleanTimeLabel = timeString?.replace(string: "<br>", replacement: " ")
+        
+        marketTitle.text = cleanTitleLabel
+        productsOffered.text = market.products
         addressLabel.text = market.location
-        seasonLabel.text = market.time
+        timeDetails.text = cleanTimeLabel
         
         
     }
@@ -191,17 +186,15 @@ class MarketDetailsViewController: UIViewController {
         view.addSubview(informationContainerView)
         
         informationContainerView.addSubview(marketDetailStackView)
-        informationContainerView.addSubview(seasonHourDayStackView)
-        informationContainerView.addSubview(addressDistance)
+//        informationContainerView.addSubview(timeDetails)
         informationContainerView.addSubview(dismissButton)
-        informationContainerView.addSubview(directionIcon)
         
         NSLayoutConstraint.activate([
             
             informationContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             informationContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             informationContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            informationContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
+            informationContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
             
             dismissButton.heightAnchor.constraint(equalTo: informationContainerView.heightAnchor, multiplier: 0.05),
             dismissButton.leadingAnchor.constraint(equalTo: marketDetailStackView.leadingAnchor),
@@ -209,24 +202,18 @@ class MarketDetailsViewController: UIViewController {
             
             marketDetailStackView.topAnchor.constraint(equalTo: informationContainerView.topAnchor, constant: 20),
             marketDetailStackView.leadingAnchor.constraint(equalTo: informationContainerView.leadingAnchor, constant: 20),
-            marketDetailStackView.trailingAnchor.constraint(equalTo: informationContainerView.trailingAnchor),
+            marketDetailStackView.trailingAnchor.constraint(equalTo: informationContainerView.trailingAnchor, constant: -20),
             marketDetailStackView.bottomAnchor.constraint(equalTo: informationContainerView.bottomAnchor),
             
-            addressDistance.topAnchor.constraint(equalTo: marketTitle.bottomAnchor),
-            addressDistance.leadingAnchor.constraint(equalTo: marketTitle.leadingAnchor),
-            addressDistance.trailingAnchor.constraint(equalTo: marketTitle.trailingAnchor),
+            addressDirection.topAnchor.constraint(equalTo: marketTitle.bottomAnchor),
+            addressDirection.leadingAnchor.constraint(equalTo: marketDetailStackView.leadingAnchor),
+            addressDirection.widthAnchor.constraint(equalTo: marketDetailStackView.widthAnchor),
+            addressDirection.bottomAnchor.constraint(equalTo: timeDetails.topAnchor, constant: -110),
+        
+            addressLabel.trailingAnchor.constraint(equalTo: addressDirection.trailingAnchor, constant: -60),
             
-            directionIcon.heightAnchor.constraint(equalTo: informationContainerView.heightAnchor, multiplier: 0.08),
-            directionIcon.leadingAnchor.constraint(equalTo: addressDistance.leadingAnchor, constant: 295),
-            directionIcon.trailingAnchor.constraint(equalTo: addressDistance.trailingAnchor, constant: -20),
-            directionIcon.bottomAnchor.constraint(equalTo: addressDistance.topAnchor, constant: 45),
-            
-            seasonHourDayStackView.heightAnchor.constraint(equalTo: seasonAndHourTitle.heightAnchor, multiplier: 0.4),
-            seasonHourDayStackView.topAnchor.constraint(equalTo: seasonAndHourTitle.bottomAnchor),
-            seasonHourDayStackView.leadingAnchor.constraint(equalTo: seasonAndHourTitle.leadingAnchor),
-            seasonHourDayStackView.trailingAnchor.constraint(equalTo: seasonAndHourTitle.trailingAnchor)
-            
-            
+            productsOffered.bottomAnchor.constraint(equalTo: marketDetailStackView.bottomAnchor, constant: 90)
+
             ])
     }
     

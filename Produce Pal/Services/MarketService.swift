@@ -94,6 +94,7 @@ struct MarketService{
                 resultMarket.products = marketDetails["Products"].string
                 resultMarket.location = marketDetails["Address"].string
                 resultMarket.time = marketDetails["Schedule"].string
+                resultMarket.googleLink = marketDetails["GoogleLink"].string
                 print(resultMarket)
                 return completion(.success(resultMarket))
 

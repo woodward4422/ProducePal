@@ -294,6 +294,8 @@ extension MapViewController : MKMapViewDelegate {
         
         let titleString = filteredMarket[0].name
         let cleanTitleLabel = titleString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        
 
         previewTitleDetails.text = cleanTitleLabel
         previewSeasonalDetails.text = cleanTimeLabel

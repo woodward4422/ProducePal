@@ -13,6 +13,7 @@ struct Market{
     var id: String
     var name: String
     var location: String?
+    var googleLink: String?
     var time: String?
     var products: String?
     var lat: Double?

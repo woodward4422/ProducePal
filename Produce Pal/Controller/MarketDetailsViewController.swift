@@ -79,8 +79,23 @@ class MarketDetailsViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
+    
+    @objc func directionPressed(){
+        guard let unwrappedMarket = selectedMarket else {fatalError("This should never happen")}
+        guard let googleMapsLink = unwrappedMarket.googleLink else {
+            
+            let alertVC = UIAlertController(title: "No Valid Map Link", message: "There is not a link for directions to the Farmers Market at this time", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            self.present(alertVC, animated: true)
+            return
+        }
+        if let url = NSURL(string: googleMapsLink) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
+    }
     
     // MARK: - Labels for the seasonAndHour section
     
@@ -161,6 +176,7 @@ class MarketDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupLayout()
+        directionIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(directionPressed)))
         configureDataSources()
         view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     }

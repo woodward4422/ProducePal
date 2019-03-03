@@ -9,5 +9,6 @@ target 'Produce Pal' do
   pod 'Alamofire'
   pod 'Result'
   pod 'SwiftyJSON'
+  pod 'paper-onboarding'
 
 end

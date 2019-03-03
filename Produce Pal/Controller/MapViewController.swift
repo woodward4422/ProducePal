@@ -98,6 +98,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         self.sanitizeMarkets()
         self.showLocation()
         self.setupMarketPreview()
+        
+        // Checks if user already did on-boarding
+        UserDefaults.standard.set(true, forKey: "current_user")
+        
     }
     
     private func setupMap() {

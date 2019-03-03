@@ -14,12 +14,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    class var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        showMarketDetails()
-        showMap()
+        checkFirstTimeUser()
         return true
+    }
+    
+    func checkFirstTimeUser() {
+        let isCurrentUser = UserDefaults.standard.bool(forKey: "current_user")
+        
+        if isCurrentUser {
+            showMap()
+            
+        } else {
+            UserDefaults.standard.set(false, forKey: "current_user")
+            showOnBoarding()
+        }
+    }
+    
+    func showOnBoarding() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = OnBoardingViewController()
     }
     
     func showMap() {
@@ -29,12 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = MapViewController()
     }
     
-    func showMarketDetails() {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        window?.rootViewController = MarketDetailsViewController()
-    }
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

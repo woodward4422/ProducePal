@@ -95,16 +95,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager.requestAlwaysAuthorization()
-            locationManager.requestWhenInUseAuthorization()
-        }
-        self.setupMap()
-        self.sanitizeMarkets()
 
-            self.showLocation()
+        self.setupMap()
+
+        self.showLocation()
         self.setupMarketPreview()
         
         // Checks if user already did on-boarding
@@ -134,20 +128,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
         
     }
     
-    private func sanitizeMarkets(){
-        
-    }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-
-        
-        showLocation()
+        switch status {
+        case .denied:
+            let alertVC = UIAlertController(title: "Permission Denied", message: "Produce Pal will not be able to show you markets. Please go to Settings for Produce Pal and enable location services.", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                self.locationManager.requestAlwaysAuthorization()
+                self.locationManager.requestWhenInUseAuthorization()
+            }
+            alertVC.addAction(cancel)
+            present(alertVC, animated: true)
+        default:
+            showLocation()
+        }
     }
+    
     private func showLocation() {
         
-
-
-        
         // Check for Location Services
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+        }
 
         
         //Zoom to user location

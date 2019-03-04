@@ -17,6 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     var userZIP: String?
     private var selectedMarket: Market?
     
+    
     private let marketMap: MKMapView = {
         let mapView = MKMapView()
         mapView.mapType = MKMapType.standard
@@ -94,14 +95,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+        }
         self.setupMap()
         self.sanitizeMarkets()
-        self.showLocation()
+
+            self.showLocation()
         self.setupMarketPreview()
         
         // Checks if user already did on-boarding
         UserDefaults.standard.set(true, forKey: "current_user")
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1200, longitudinalMeters: 1200)
+            print(userLocation)
+            marketMap.setRegion(viewRegion, animated: false)
+        }
     }
     
     private func setupMap() {
@@ -121,18 +137,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
     private func sanitizeMarkets(){
         
     }
-    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+        
+        showLocation()
+    }
     private func showLocation() {
         
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+
         
         // Check for Location Services
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager.requestAlwaysAuthorization()
-            locationManager.requestWhenInUseAuthorization()
-        }
+
         
         //Zoom to user location
         if let userLocation = locationManager.location?.coordinate {
@@ -166,7 +182,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate  {
             
         }
         
-        self.locationManager = locationManager
+//        self.locationManager = locationManager
         
         DispatchQueue.main.async {
             self.locationManager.startUpdatingLocation()
@@ -306,6 +322,8 @@ extension MapViewController : MKMapViewDelegate {
         marketDetailView.isHidden = true
         
     }
+    
+    
     
 
 }
